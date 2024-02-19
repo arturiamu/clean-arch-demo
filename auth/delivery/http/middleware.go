@@ -4,7 +4,6 @@ import (
 	"clean-arch-demo/auth"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 )
 
 type AuthMiddleware struct {
@@ -24,18 +23,7 @@ func (m *AuthMiddleware) Handle(c *gin.Context) {
 		return
 	}
 
-	headerParts := strings.Split(authHeader, " ")
-	if len(headerParts) != 2 {
-		c.AbortWithStatus(http.StatusUnauthorized)
-		return
-	}
-
-	if headerParts[0] != "Bearer" {
-		c.AbortWithStatus(http.StatusUnauthorized)
-		return
-	}
-
-	user, err := m.useCase.ParseToken(c.Request.Context(), headerParts[1])
+	user, err := m.useCase.ParseToken(c.Request.Context(), authHeader)
 	if err != nil {
 		status := http.StatusInternalServerError
 		if err == auth.ErrInvalidAccessToken {
