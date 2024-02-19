@@ -1,0 +1,24 @@
+# Application settings
+app:
+  name: MyWebApp
+  port: 8080
+  secret_key: "my-secret-key"
+
+# Auth settings
+auth:
+  hash_salt: "hash_salt"
+  signing_key: "signing_key"
+  token_ttl: 86400
+
+# Database settings
+database:
+  name: mydatabase
+  host: localhost
+  port: 5432
+  username: myusername
+  password: mypassword
+
+# Logging settings
+logging:
+  level: debug
+  file_path: ./logs/mywebapp.log
